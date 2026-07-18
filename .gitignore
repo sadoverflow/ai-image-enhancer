@@ -1,0 +1,16 @@
+# JavaScript build artefacts
+node_modules/
+dist/
+coverage/
+*.log
+
+# Local project materials that are not published to Git
+/docs/
+/ml/
+/tests/
+
+# Local settings and operating-system files
+.env
+.env.*
+!.env.example
+.DS_Store

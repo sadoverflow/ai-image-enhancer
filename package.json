@@ -1,0 +1,23 @@
+{
+  "name": "browser-image-enhancer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Улучшение фото в браузере с помощью ML",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "check:size": "node scripts/check-size.mjs"
+  },
+  "dependencies": {
+    "heic2any": "^0.0.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0",
+    "vite": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

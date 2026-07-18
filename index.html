@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Улучшение фото</title>
+  </head>
+  <body>
+    <main class="page">
+      <h1>Улучшение фото</h1>
+      <p class="hint">Загрузите изображение — обработка идёт в браузере, файл никуда не отправляется.</p>
+
+      <label class="drop" id="drop-zone">
+        <input id="file-input" type="file" accept=".jpg,.jpeg,.png,.bmp,.heic,.heif,image/*" />
+        <span>Выберите файл или перетащите сюда</span>
+        <small>JPG, PNG, HEIC, BMP · до 15 Мп</small>
+      </label>
+
+      <div class="status-row">
+        <div>
+          <p id="status-label">Ожидание файла</p>
+          <div class="bar"><div id="progress-bar"></div></div>
+        </div>
+        <button id="abort-button" type="button" disabled>Отменить</button>
+      </div>
+
+      <section id="preview-section" class="preview" hidden>
+        <div>
+          <p>До</p>
+          <img id="source-preview" alt="" />
+        </div>
+        <div>
+          <p>После</p>
+          <img id="result-preview" alt="" />
+        </div>
+      </section>
+
+      <a id="download-link" hidden download="result.jpg">Скачать</a>
+      <p id="error-message" hidden></p>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

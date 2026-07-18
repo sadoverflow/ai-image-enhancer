@@ -1,0 +1,143 @@
+{
+  "dtype": "float32-le",
+  "tensors": [
+    {
+      "name": "model.1.weight",
+      "shape": [
+        16,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "model.1.bias",
+      "shape": [
+        16
+      ]
+    },
+    {
+      "name": "model.3.weight",
+      "shape": [
+        16
+      ]
+    },
+    {
+      "name": "model.3.bias",
+      "shape": [
+        16
+      ]
+    },
+    {
+      "name": "model.4.weight",
+      "shape": [
+        32,
+        16,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "model.4.bias",
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "model.6.weight",
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "model.6.bias",
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "model.7.weight",
+      "shape": [
+        64,
+        32,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "model.7.bias",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "name": "model.9.weight",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "name": "model.9.bias",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "name": "model.10.weight",
+      "shape": [
+        128,
+        64,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "model.10.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "model.12.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "model.12.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "model.13.weight",
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "model.13.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "model.16.weight",
+      "shape": [
+        3,
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "name": "model.16.bias",
+      "shape": [
+        3
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "shape": [
+    3,
+    3,
+    33,
+    33,
+    33
+  ],
+  "dtype": "float16-le",
+  "order": "basis,channel,r,g,b",
+  "upstream_repository": "https://github.com/HuiZeng/Image-Adaptive-3DLUT",
+  "upstream_commit": "b491f6df64a588864739a157db271e5c848e1805",
+  "classifier_sha256": "fce0aaefefccbfe6acb831ff1325b109510e06b333c2ecae0b12a7de64888806",
+  "classifier_weights_sha256": "c8c8f863c129360d2f896a5aef22329f4275813b7764e568f95b0474c797991c",
+  "lut_sha256": "14688a0ea4a3f1fe534ab71d735abe5b5391f5cd8d86dfeed74b391fe1eb56cb",
+  "torch_onnx_max_abs_error": 6.318092346191406e-06
+}
