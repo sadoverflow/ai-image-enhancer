@@ -65,11 +65,13 @@ precision highp float;
 uniform sampler2D uSrc;
 uniform sampler3D uL0, uL1, uL2;
 uniform vec3 uW;
+uniform float uDim;
 in vec2 vUv; out vec4 outColor;
 void main() {
   vec4 s = texture(uSrc, vUv);
   vec3 c = clamp(s.rgb, 0.0, 1.0);
-  vec3 e = uW.x * texture(uL0, c).rgb + uW.y * texture(uL1, c).rgb + uW.z * texture(uL2, c).rgb;
+  vec3 lutCoord = c * ((uDim - 1.0) / uDim) + vec3(0.5 / uDim);
+  vec3 e = uW.x * texture(uL0, lutCoord).rgb + uW.y * texture(uL1, lutCoord).rgb + uW.z * texture(uL2, lutCoord).rgb;
   outColor = vec4(clamp(e, 0.0, 1.0), s.a);
 }`;
 
@@ -102,6 +104,7 @@ void main() {
     gl.uniform1i(gl.getUniformLocation(program, `uL${i}`), i + 1);
   }
   gl.uniform3fv(gl.getUniformLocation(program, 'uW'), weights);
+  gl.uniform1f(gl.getUniformLocation(program, 'uDim'), assets.dimension);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   const blob = await canvas.convertToBlob({ type: mime, quality: mime === 'image/jpeg' ? 0.92 : undefined });
   gl.deleteTexture(tex);
@@ -144,9 +147,9 @@ function mixLuts(assets: LutAssets, weights: Float32Array): Float32Array {
   const voxels = d ** 3;
   const mixed = new Float32Array(voxels * 3);
   for (let ch = 0; ch < 3; ch += 1) for (let r = 0; r < d; r += 1) for (let g = 0; g < d; g += 1) for (let b = 0; b < d; b += 1) {
-    const target = ((ch * d + r) * d + g) * d + b;
+    const target = ch * voxels + r + g * d + b * d * d;
     let v = 0;
-    for (let i = 0; i < 3; i += 1) v += assets.bases[(((i * 3 + ch) * d + r) * d + g) * d + b] * weights[i];
+    for (let i = 0; i < 3; i += 1) v += assets.bases[(((i * 3 + ch) * d + b) * d + g) * d + r] * weights[i];
     mixed[target] = v;
   }
   return mixed;
@@ -170,7 +173,7 @@ function sample(lut: Float32Array, dim: number, r: number, g: number, b: number,
   const tx = fx - x0; const ty = fy - y0; const tz = fz - z0;
   const out: [number, number, number] = [0, 0, 0];
   for (let ch = 0; ch < 3; ch += 1) {
-    const at = (r: number, g: number, b: number) => lut[((ch * dim + r) * dim + g) * dim + b];
+    const at = (r: number, g: number, b: number) => lut[ch * dim * dim * dim + r + g * dim + b * dim * dim];
     const c00 = at(x0, y0, z0) * (1 - tx) + at(x1, y0, z0) * tx;
     const c01 = at(x0, y0, z1) * (1 - tx) + at(x1, y0, z1) * tx;
     const c10 = at(x0, y1, z0) * (1 - tx) + at(x1, y1, z0) * tx;
@@ -186,7 +189,7 @@ function uploadLut(gl: WebGL2RenderingContext, assets: LutAssets, basis: number)
   for (let b = 0; b < d; b += 1) for (let g = 0; g < d; g += 1) for (let r = 0; r < d; r += 1) {
     const target = ((b * d + g) * d + r) * 4;
     for (let ch = 0; ch < 3; ch += 1) {
-      packed[target + ch] = floatToHalf(assets.bases[(((basis * 3 + ch) * d + r) * d + g) * d + b]);
+      packed[target + ch] = floatToHalf(assets.bases[(((basis * 3 + ch) * d + b) * d + g) * d + r]);
     }
     packed[target + 3] = 0x3c00;
   }
